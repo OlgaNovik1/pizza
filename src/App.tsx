@@ -19,14 +19,18 @@ const App: FC = () => {
       newPizza.id === pizza.id ? newPizza : pizza));
   }
 
-  console.log(pizzasList)
+  const deletePizza = (id: number) => {
+    const newPizzasList = pizzasList.filter((pizza) => pizza.id !== id);
+    setPizzasList(newPizzasList);
+  }
+
 
   return (
     <div className="App">
       <div className='wrap'>
         <span className='heading'>Pizza.by</span>
         <AddPizzaForm addPizza={addPizza} />
-        <DisplayPizzas pizzasList={pizzasList} upDatePizza={upDatePizza} />
+        <DisplayPizzas pizzasList={pizzasList} upDatePizza={upDatePizza} deletePizza={deletePizza} />
       </div>
     </div>
   );

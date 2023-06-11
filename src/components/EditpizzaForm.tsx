@@ -6,9 +6,11 @@ import Pizza from '../models/Pizza';
 
 interface EditpizzaFormProps {
     data: Pizza;
+    upDatePizza: (newPizza: Pizza) => void;
+    handleToggleEdit: () => void;
 }
 
-const EditpizzaForm: FC<EditpizzaFormProps> = ({ data }) => {
+const EditpizzaForm: FC<EditpizzaFormProps> = ({ data, upDatePizza, handleToggleEdit }) => {
     const [editPizza, setEditPizza] =
         useState<Pizza>(data);
 
@@ -30,7 +32,8 @@ const EditpizzaForm: FC<EditpizzaFormProps> = ({ data }) => {
         const { title, price, img } = editPizza;
 
         if (title && price && img) {
-            console.log('edit pizza>>>', editPizza)
+            upDatePizza(editPizza);
+            handleToggleEdit();
         }
     }
 

@@ -7,15 +7,20 @@ import EditPizzaForm from './EditpizzaForm';
 
 interface SinglePizzaProps {
     pizza: Pizza;
+    upDatePizza: (newPizza: Pizza) => void;
+    deletePizza: (id: number) => void;
 }
 
-const SinglePizza: FC<SinglePizzaProps> = ({ pizza }) => {
+const SinglePizza: FC<SinglePizzaProps> = ({ pizza, upDatePizza, deletePizza }) => {
     const [edit, setEdit] = useState<boolean>(false);
 
     const handleToggleEdit = () => {
         setEdit(!edit);
     }
 
+    const handleDelete = () => {
+        deletePizza(pizza.id)
+    }
 
 
     return (
@@ -26,11 +31,11 @@ const SinglePizza: FC<SinglePizzaProps> = ({ pizza }) => {
 
             <div className='pizza-controls'>
                 <AiFillEdit onClick={handleToggleEdit} />
-                <AiOutlineDelete />
+                <AiOutlineDelete onClick={handleDelete} />
             </div>
 
             {edit
-                ? <EditPizzaForm data={pizza} />
+                ? <EditPizzaForm data={pizza} upDatePizza={upDatePizza} handleToggleEdit={handleToggleEdit} />
                 : null
             }
 
@@ -38,4 +43,4 @@ const SinglePizza: FC<SinglePizzaProps> = ({ pizza }) => {
     )
 }
 
-export default SinglePizza
+export default SinglePizza;
