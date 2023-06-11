@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import './App.css';
 import AddPizzaForm from './components/AddPizzaForm';
 import Pizza from './models/Pizza';
+import DisplayPizzas from './components/DisplayPizzas';
 
 
 
@@ -13,6 +14,11 @@ const App: FC = () => {
     setPizzasList([...pizzasList, newPizza]);
   }
 
+  const upDatePizza = (newPizza: Pizza) => {
+    setPizzasList(pizzasList.map((pizza) =>
+      newPizza.id === pizza.id ? newPizza : pizza));
+  }
+
   console.log(pizzasList)
 
   return (
@@ -20,6 +26,7 @@ const App: FC = () => {
       <div className='wrap'>
         <span className='heading'>Pizza.by</span>
         <AddPizzaForm addPizza={addPizza} />
+        <DisplayPizzas pizzasList={pizzasList} upDatePizza={upDatePizza} />
       </div>
     </div>
   );
